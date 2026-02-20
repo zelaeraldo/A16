@@ -1,0 +1,597 @@
+﻿<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventHub Pro - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #f72585;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fb;
+            color: var(--dark);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.3s ease;
+        }
+
+            .glass-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
+            }
+
+        .sidebar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+            .sidebar .nav-link {
+                color: rgba(255, 255, 255, 0.8);
+                border-radius: 8px;
+                margin: 4px 0;
+                padding: 10px 15px;
+                transition: all 0.3s ease;
+            }
+
+                .sidebar .nav-link:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: white;
+                }
+
+                .sidebar .nav-link.active {
+                    background: rgba(255, 255, 255, 0.2);
+                    color: white;
+                    font-weight: 500;
+                }
+
+        .stat-card {
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+            .stat-card:hover {
+                transform: translateY(-3px);
+            }
+
+        .event-card {
+            transition: all 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+            .event-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .category-badge {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+                opacity: 0.15;
+                z-index: 0;
+            }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Modal styles */
+        .modal-content {
+            border-radius: 16px;
+            border: none;
+        }
+
+        .modal-header {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <!-- Sidebar -->
+            <div class="col-lg-2 sidebar d-none d-lg-block">
+                <div class="p-4">
+                    <div class="text-center mb-5">
+                        <h3 class="fw-bold">EventHub</h3>
+                        <p class="small opacity-75">Premium Event Management</p>
+                    </div>
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" data-section="dashboard">
+                                <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://localhost:7060/Events" data-section="Events">
+                                <i class="bi bi-calendar-event me-2"></i>Eventet
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="window.open('https://localhost:7060/Tickets', '_blank'); return false;">
+                                <i class="bi bi-ticket-perforated me-2"></i>Biletat
+                            </a>
+                        </li>
+                      
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://localhost:7060/Locations" data-section="locations">
+                                <i class="bi bi-geo-alt me-2"></i>Lokacionet
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://localhost:7060/FAQs" data-section="faq" id="faqLink">
+                                <i class="bi bi-question-circle me-2"></i>FAQ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://localhost:7060/EventCategories" data-section="categories" id="categoriesLink">
+                                <i class="bi bi-tags me-2"></i>Kategoritë
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <main class="col-lg-10 p-4">
+                <!-- Hero Section -->
+                <div class="hero-section p-5 mb-4 glass-card">
+                    <div class="hero-content text-center">
+                        <h1 class="display-4 fw-bold mb-3">Mirësevini në EventHub</h1>
+                        <p class="lead mb-4">Platforma juaj profesionale për menaxhimin e eventeve</p>
+                        <button class="btn btn-light btn-lg px-4" id="createEventBtn">Krijo Event të Ri</button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="stat-card p-4 glass-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-2">Eventet Aktive</h6>
+                                    <h3 class="mb-0 fw-bold">2</h3>
+                                </div>
+                                <div class="bg-primary bg-opacity-10 p-3 rounded">
+                                    <i class="bi bi-calendar-event text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="stat-card p-4 glass-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-2">Përdoruesit</h6>
+                                    <h3 class="mb-0 fw-bold">3</h3>
+                                </div>
+                                <div class="bg-success bg-opacity-10 p-3 rounded">
+                                    <i class="bi bi-people-fill text-success"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="stat-card p-4 glass-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-2">Lokacionet</h6>
+                                    <h3 class="mb-0 fw-bold">3</h3>
+                                </div>
+                                <div class="bg-info bg-opacity-10 p-3 rounded">
+                                    <i class="bi bi-geo-alt-fill text-info"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="stat-card p-4 glass-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-2">Kategoritë</h6>
+                                    <h3 class="mb-0 fw-bold">5</h3>
+                                </div>
+                                <div class="bg-warning bg-opacity-10 p-3 rounded">
+                                    <i class="bi bi-tags-fill text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events Section -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="fw-bold mb-0">Eventet e Fundit</h3>
+                            <a href="https://localhost:7060/Events" class="btn btn-sm btn-outline-primary" id="viewAllEventsBtn">Shiko të Gjitha</a>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="event-card card h-100 glass-card">
+                                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Konferenca">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="badge bg-primary category-badge">Konferenca</span>
+                                            <small class="text-muted">10-11 Dhjetor 2023</small>
+                                        </div>
+                                        <h5 class="card-title">Konferenca e Teknologjisë</h5>
+                                        <p class="card-text">Konferencë mbi teknologjitë e fundit në industri.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="bi bi-geo-alt-fill text-muted me-1"></i>
+                                                <small>Tirana</small>
+                                            </div>
+                                            <span class="badge bg-success">Aktiv</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-top-0">
+                                        <button class="btn btn-sm btn-outline-primary me-2 event-details-btn" data-event-id="1">Detajet</button>
+                                        <button class="btn btn-sm btn-outline-secondary edit-event-btn" data-event-id="1">Edito</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <div class="event-card card h-100 glass-card">
+                                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Koncert">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="badge bg-success category-badge">Koncert</span>
+                                            <small class="text-muted">15 Dhjetor 2023</small>
+                                        </div>
+                                        <h5 class="card-title">Koncert i Muzikës Popullore</h5>
+                                        <p class="card-text">Koncert me artistë të njohur të muzikës popullore.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="bi bi-geo-alt-fill text-muted me-1"></i>
+                                                <small>Durrës</small>
+                                            </div>
+                                            <span class="badge bg-success">Aktiv</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-top-0">
+                                        <button class="btn btn-sm btn-outline-primary me-2 event-details-btn" data-event-id="2">Detajet</button>
+                                        <button class="btn btn-sm btn-outline-secondary edit-event-btn" data-event-id="2">Edito</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users and FAQ Section -->
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <div class="card glass-card h-100">
+                            <div class="card-header bg-transparent">
+                                <h5 class="mb-0 fw-bold">Përdoruesit e Fundit</h5>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>Përdoruesi</th>
+                                                <th>Email</th>
+                                                <th>Roli</th>
+                                                <th>Statusi</th>
+                                                <th>Veprime</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="https://ui-avatars.com/api/?name=Admin&background=random" class="user-avatar me-2">
+                                                        <span>Admin User</span>
+                                                    </div>
+                                                </td>
+                                                <td>admin@example.com</td>
+                                                <td><span class="badge bg-danger">Admin</span></td>
+                                                <td><span class="badge bg-success">Aktiv</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary edit-user-btn" data-user-id="1">Edito</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="https://ui-avatars.com/api/?name=Organizer&background=random" class="user-avatar me-2">
+                                                        <span>Organizer User</span>
+                                                    </div>
+                                                </td>
+                                                <td>organizer@example.com</td>
+                                                <td><span class="badge bg-warning text-dark">Organizer</span></td>
+                                                <td><span class="badge bg-success">Aktiv</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary edit-user-btn" data-user-id="2">Edito</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="https://ui-avatars.com/api/?name=User&background=random" class="user-avatar me-2">
+                                                        <span>Regular User</span>
+                                                    </div>
+                                                </td>
+                                                <td>user@example.com</td>
+                                                <td><span class="badge bg-primary">User</span></td>
+                                                <td><span class="badge bg-success">Aktiv</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary edit-user-btn" data-user-id="3">Edito</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mb-4">
+                        <div class="card glass-card h-100">
+                            <div class="card-header bg-transparent">
+                                <h5 class="mb-0 fw-bold">Pyetjet e Shpeshta</h5>
+                                <a href="https://localhost:7060/FAQs" class="btn btn-sm btn-outline-primary" id="viewAllFAQsBtn">Shiko të Gjitha</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="accordion" id="faqAccordion">
+                                    <div class="accordion-item border-0 mb-2">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                                Si mund të blej një biletë?
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                Mund të blini biletë direkt në faqen e eventit ose në pikën e shitjes.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item border-0">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                                A mund të anuloj një blerje?
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                Politika e anulimit varet nga organizatori i eventit.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+  
+   
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Sidebar navigation
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+
+                    // Add active class to clicked link
+                    this.classList.add('active');
+
+                    // Check if this is a link that should redirect
+                    if (this.getAttribute('data-section') === 'Events' ||
+      
+                        this.getAttribute('data-section') === 'locations') {
+                        // Let the default link behavior handle the navigation
+                        return;
+                    }
+
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    console.log(`Navigating to ${section} section`);
+                    
+                });
+            });
+
+            // Create Event Button
+            const createEventBtn = document.getElementById('createEventBtn');
+            const createEventModal = new bootstrap.Modal(document.getElementById('createEventModal'));
+
+            createEventBtn.addEventListener('click', function() {
+                createEventModal.show();
+            });
+
+            // Save Event Button
+            const saveEventBtn = document.getElementById('saveEventBtn');
+            saveEventBtn.addEventListener('click', function() {
+                const eventTitle = document.getElementById('eventTitle').value;
+                alert(`Event "${eventTitle}" u ruajt me sukses!`);
+                createEventModal.hide();
+                document.getElementById('eventForm').reset();
+            });
+
+            // View All Events Button
+            const viewAllEventsBtn = document.getElementById('viewAllEventsBtn');
+            viewAllEventsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = "https://localhost:7060/Events";
+            });
+
+            // Event Details Buttons
+            const eventDetailsBtns = document.querySelectorAll('.event-details-btn');
+            const eventDetailsModal = new bootstrap.Modal(document.getElementById('eventDetailsModal'));
+
+            eventDetailsBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const eventId = this.getAttribute('data-event-id');
+                    let eventData = {};
+
+                    if (eventId === '1') {
+                        eventData = {
+                            title: 'Konferenca e Teknologjisë',
+                            description: 'Konferencë mbi teknologjitë e fundit në industri.',
+                            category: 'Konferenca',
+                            date: '10-11 Dhjetor 2023',
+                            location: 'Tirana',
+                            status: 'Aktiv',
+                            image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+                        };
+                    } else if (eventId === '2') {
+                        eventData = {
+                            title: 'Koncert i Muzikës Popullore',
+                            description: 'Koncert me artistë të njohur të muzikës popullore.',
+                            category: 'Koncert',
+                            date: '15 Dhjetor 2023',
+                            location: 'Durrës',
+                            status: 'Aktiv',
+                            image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+                        };
+                    }
+
+                    document.getElementById('detailEventTitle').textContent = eventData.title;
+                    document.getElementById('detailEventDescription').textContent = eventData.description;
+                    document.getElementById('detailEventCategory').textContent = eventData.category;
+                    document.getElementById('detailEventCategory').className = 'badge ' + (eventData.category === 'Konferenca' ? 'bg-primary' : 'bg-success');
+                    document.getElementById('detailEventDate').textContent = eventData.date;
+                    document.getElementById('detailEventLocation').textContent = eventData.location;
+                    document.getElementById('detailEventStatus').textContent = eventData.status;
+                    document.getElementById('detailEventStatus').className = 'badge bg-success';
+                    document.getElementById('detailEventImage').src = eventData.image;
+
+                    eventDetailsModal.show();
+                });
+            });
+
+            // Edit Event Buttons
+            const editEventBtns = document.querySelectorAll('.edit-event-btn');
+            editEventBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const eventId = this.getAttribute('data-event-id');
+                    alert(`Duke edituar eventin me ID: ${eventId}`);
+                });
+            });
+
+            // Edit User Buttons
+            const editUserBtns = document.querySelectorAll('.edit-user-btn');
+            const editUserModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+
+            editUserBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const userId = this.getAttribute('data-user-id');
+                    let userData = {};
+
+                    if (userId === '1') {
+                        userData = {
+                            name: 'Admin User',
+                            email: 'admin@example.com',
+                            role: 'Admin',
+                            status: 'Aktiv'
+                        };
+                    } else if (userId === '2') {
+                        userData = {
+                            name: 'Organizer User',
+                            email: 'organizer@example.com',
+                            role: 'Organizer',
+                            status: 'Aktiv'
+                        };
+                    } else if (userId === '3') {
+                        userData = {
+                            name: 'Regular User',
+                            email: 'user@example.com',
+                            role: 'User',
+                            status: 'Aktiv'
+                        };
+                    }
+
+                    document.getElementById('userName').value = userData.name;
+                    document.getElementById('userEmail').value = userData.email;
+                    document.getElementById('userRole').value = userData.role;
+                    document.getElementById('userStatus').value = userData.status;
+
+                    editUserModal.show();
+                });
+            });
+
+            // Save User Button
+            const saveUserBtn = document.getElementById('saveUserBtn');
+            saveUserBtn.addEventListener('click', function() {
+                const userName = document.getElementById('userName').value;
+                alert(`Përdoruesi "${userName}" u përditësua me sukses!`);
+                editUserModal.hide();
+            });
+        });
+    </script>
+</body>
+</html>

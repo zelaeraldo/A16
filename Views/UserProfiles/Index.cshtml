@@ -1,0 +1,64 @@
+﻿@model IEnumerable<UserProfile>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+            .profile-container h2 {
+                margin-bottom: 25px;
+                text-align: center;
+                color: #2c3e50;
+            }
+
+        .btn-save {
+            background-color: #2575fc;
+            color: white;
+            border: none;
+        }
+
+            .btn-save:hover {
+                background-color: #1a5cd8;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h2>Profili i Përdoruesit</h2>
+        <form method="post" action="/UserProfiles/Save">
+            <div class="mb-3">
+                <label for="fullName" class="form-label">Emri dhe Mbiemri</label>
+                <input type="text" class="form-control" id="fullName" name="FullName" placeholder="Shkruani emrin e plotë" required>
+            </div>
+            <div class="mb-3">
+                <label for="birthDate" class="form-label">Data e Lindjes</label>
+                <input type="date" class="form-control" id="birthDate" name="BirthDate" required>
+            </div>
+            <div class="mb-3">
+                <label for="bio" class="form-label">Bio</label>
+                <textarea class="form-control" id="bio" name="Bio" rows="4" placeholder="Shkruani një përshkrim për veten..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-save w-100">Ruaj Profilin</button>
+        </form>
+    </div>
+
+</body>
+</html>

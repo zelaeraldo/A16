@@ -1,0 +1,9 @@
+﻿@@model Event
+
+<h1>Fshi Eventin</h1>
+<p>A jeni i sigurt që doni të fshini <strong>@Model.Title</strong>?</p>
+<form asp-action="Delete">
+    
+    <button type="submit" class="btn btn-danger">Po, Fshi</button>
+    <a asp-action="Index" class="btn btn-secondary">Anulo</a>
+</form>

@@ -1,0 +1,44 @@
+﻿@model A16.Models.Event
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="modal fade" id="eventDetailsModal" tabindex="-1" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="eventDetailsModalLabel">Detajet e Eventit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <img id="detailEventImage" src="" class="img-fluid rounded mb-3" alt="Event Image">
+                    <h4 id="detailEventTitle"></h4>
+                    <span class="badge" id="detailEventCategory"></span>
+                </div>
+                <div class="mb-3">
+                    <h6>Përshkrimi:</h6>
+                    <p id="detailEventDescription"></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <h6>Data:</h6>
+                        <p id="detailEventDate"></p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <h6>Lokacioni:</h6>
+                        <p id="detailEventLocation"></p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h6>Statusi:</h6>
+                    <span class="badge" id="detailEventStatus"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mbyll</button>
+            </div>
+        </div>
+    </div>
+</div>
