@@ -1,0 +1,47 @@
+a.navbar-brand[b-jg8gxnbyyv] {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+a[b-jg8gxnbyyv] {
+    color: #5a8bd4; /* ngjyrë blu më e hapur */
+}
+
+.btn-primary[b-jg8gxnbyyv] {
+    color: #fff;
+    background-color: #7aa7e9; /* blu pastel më e lehtë */
+    border-color: #6a96d1;
+}
+
+.nav-pills .nav-link.active[b-jg8gxnbyyv], .nav-pills .show > .nav-link[b-jg8gxnbyyv] {
+    color: #fff;
+    background-color: #7aa7e9;
+    border-color: #6a96d1;
+}
+
+.border-top[b-jg8gxnbyyv] {
+    border-top: 1px solid #dddfe2; /* ngjyrë gri shumë e lehtë */
+}
+
+.border-bottom[b-jg8gxnbyyv] {
+    border-bottom: 1px solid #dddfe2;
+}
+
+.box-shadow[b-jg8gxnbyyv] {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .03); /* hije shumë e butë */
+}
+
+button.accept-policy[b-jg8gxnbyyv] {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer[b-jg8gxnbyyv] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    color: #777f9a; /* ngjyrë gri/blu shumë e lehtë për tekstin e footer */
+}
