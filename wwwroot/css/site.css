@@ -1,0 +1,264 @@
+/* Stilet globale */
+:root {
+    --primary-color: #4e73df;
+    --secondary-color: #f8f9fc;
+    --accent-color: #2e59d9;
+    --text-color: #3a3b45;
+    --light-color: #ffffff;
+    --dark-color: #1a1a1a;
+    --success-color: #1cc88a;
+    --danger-color: #e74a3b;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--secondary-color);
+}
+
+/* Stilet për hero seksionin */
+.jumbotron {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--light-color);
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 !important;
+}
+
+    .jumbotron::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+        opacity: 0.15;
+        z-index: 0;
+    }
+
+    .jumbotron .container {
+        position: relative;
+        z-index: 1;
+    }
+
+.display-4 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Stilet për karakteristikat */
+.container.mt-5 {
+    padding: 4rem 0;
+}
+
+.container h2 {
+    font-weight: 700;
+    margin-bottom: 3rem;
+    position: relative;
+    color: var(--dark-color);
+}
+
+    .container h2::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--primary-color);
+        margin: 15px auto;
+        border-radius: 2px;
+    }
+
+.row.text-center .col-md-4 {
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+    .row.text-center .col-md-4:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        background-color: var(--light-color);
+    }
+
+.bi {
+    margin-bottom: 1rem;
+}
+
+/* Stilet për galerinë */
+.row.g-3 {
+    margin-top: 2rem;
+}
+
+.img-fluid {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 250px;
+    object-fit: cover;
+}
+
+    .img-fluid:hover {
+        transform: scale(1.03);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+/* Stilet për rreth nesh seksionin */
+.row.align-items-center {
+    padding: 4rem 0;
+    background-color: var(--light-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+    .row.align-items-center h2 {
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--dark-color);
+    }
+
+    .row.align-items-center p {
+        margin-bottom: 1.5rem;
+    }
+
+/* Stilet për footer */
+footer {
+    background: var(--dark-color);
+    padding: 2rem 0 !important;
+    margin-top: 4rem !important;
+}
+
+    footer p {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+/* Butonat (nëse do të shtoni) */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 0.5rem 2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+    }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2.5rem;
+    }
+
+    .lead {
+        font-size: 1.2rem;
+    }
+
+    .row.text-center .col-md-4 {
+        margin-bottom: 2rem;
+    }
+
+    .row.align-items-center {
+        text-align: center;
+    }
+
+        .row.align-items-center .col-md-6:last-child {
+            margin-top: 2rem;
+        }
+}
+/* Stilet për seksionin Kontaktoni */
+.contact-item {
+    background-color: var(--light-color);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+    .contact-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .contact-item i {
+        transition: transform 0.3s ease;
+    }
+
+    .contact-item:hover i {
+        transform: scale(1.1);
+    }
+
+/* Stilet për footer */
+footer {
+    background: linear-gradient(135deg, var(--dark-color), #000000) !important;
+}
+
+    footer h5 {
+        position: relative;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+        footer h5::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+    footer a {
+        text-decoration: none;
+        transition: color 0.3s ease, padding-left 0.3s ease;
+    }
+
+        footer a:hover {
+            color: var(--primary-color) !important;
+            padding-left: 5px;
+        }
+
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+    .social-links a:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-3px);
+    }
+
+/* Responsive design për kontaktet */
+@media (max-width: 768px) {
+    .contact-item {
+        margin-bottom: 20px;
+    }
+
+    footer .row > div {
+        margin-bottom: 30px;
+    }
+
+        footer .row > div:last-child {
+            margin-bottom: 0;
+        }
+}
